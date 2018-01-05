@@ -1,0 +1,183 @@
+# Analysis of MBA Salaries
+# NAME: VIDYA PREETHA ANANDAMURALI
+
+
+MBAss.df <- read.csv(paste("MBA Starting Salaries Data.csv", sep="")) #to read the file
+View(MBAss.df)
+summary(MBAss.df)#to obtain mean, median etc..
+
+library(psych)
+describe(MBAss.df)#extended version of the summary statistics
+ 
+#Ananlysing each variable individually
+#Distribution of age group present in the dataset
+boxplot(MBAss.df$age,horizontal = TRUE, col = "green",main="Range of ages") #using boxplot
+hist(MBAss.df$age,main = "Distribution of age", xlab = "Age",col = "yellow")#using histograms
+
+#Distribution of Male and female population in the data set
+table(MBAss.df$sex)
+
+#Distribution of gmat scores
+hist(MBAss.df$gmat_tot,main="Distribution of scores", xlab = "Gmat Scores",col="light blue")
+lines(density(MBAss.df$gmat_tot,bw=10),type ="1" , col="red",lwd=2) #density plot
+
+#Distribution of quants percentile, verbal percentile & total percentile
+boxplot(MBAss.df$gmat_qpc,horizontal = TRUE,col="yellow",main ="Quants percentile")
+boxplot(MBAss.df$gmat_vpc,horizontal = TRUE,col="red",main ="Verbal percentile")
+boxplot(MBAss.df$gmat_tpc,horizontal = TRUE,col="blue",main ="total percentile")
+
+#distribution of s_avg and f_avg
+table(MBAss.df$s_avg)
+table(MBAss.df$f_avg)
+
+#Distribution of quarters 
+hist(MBAss.df$quarter,main="Quarters Distrbution",breaks = 5,xlab="Quarter")
+# distribution of working years
+boxplot(MBAss.df$work_yrs,horizontal = TRUE,main="Distribution of working years")
+
+#Distribution of first language,salary and satisfaction
+hist(MBAss.df$frstlang,main="First language distribution",xlab="Language",breaks = 2)
+hist(MBAss.df$salary)
+table(MBAss.df$satis)
+table(MBAss.df$salary)
+
+#Relationship between parameters
+plot(MBAss.df$gmat_tot ~ MBAss.df$age) # relation between gmat score and age
+pairs(MBAss.df$gmat_tot ~ MBAss.df$age + MBAss.df$sex,cex =0.6)
+
+#between gmat verbal and quants percentile and gender
+my.col<- c("black","red")
+my.pch<- c(1,19) # defines circle shape
+plot(MBAss.df$gmat_qpc,MBAss.df$gmat_vpc,cex =1, col =my.col[MBAss.df$sex],pch=my.pch[MBAss.df$sex],xlab ="Quantitative percentile",ylab = "Verbal Percentile")
+legend(x="topright",legend = paste("male",levels(MBAss.df$sex)),col= my.col,pch=my.pch)
+
+#between language and gmat scores
+library(lattice)
+barchart(MBAss.df$frstlang~MBAss.df$gmat_tot)
+
+#corrgrams
+library(corrgram)
+corrgram(MBAss.df,order=TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel = panel.txt,main="Corrgram")
+
+#covariance matrix
+cor(MBAss.df[,c(1:13)])
+
+#subset of those who were placed 
+placed <- MBAss.df[ which(MBAss.df$salary !=0) , ]
+View(placed)
+
+median(placed$salary) # to find mean salary
+aggregate(placed$salary, by=list(sex = placed$sex), mean) # to find the mean salary of men and women
+
+#using contigency tables with chi square tests
+# between scores and gender
+mytable <- xtabs( ~gmat_tot + sex, data = placed)
+mytable
+chisq.test(mytable)
+margin.table(mytable,1)
+addmargins(mytable)
+
+#between language and gender
+mytable<- xtabs( ~placed$frstlang +placed$sex)
+mytable
+chisq.test(mytable)
+
+addmargins(mytable)
+
+#between gender and age
+mytable<-xtabs(~placed$age+placed$sex)
+mytable
+chisq.test(mytable)
+
+addmargins(mytable)
+
+
+#between quarter and language
+mytable<- xtabs(~placed$quarter +placed$frstlang)
+mytable
+chisq.test(mytable)
+
+addmargins(mytable)
+
+#quarter and gender
+mytable<- xtabs(~placed$quarter +placed$sex)
+mytable
+chisq.test(mytable)
+
+#gender and satis
+mytable<- xtabs(~placed$satis +placed$sex)
+mytable
+chisq.test(mytable)
+
+#quarter and satis
+mytable<- xtabs(~placed$satis +placed$quarter)
+mytable
+chisq.test(mytable)
+
+#Regression models
+fit <- lm(salary~.,data=placed)
+summary(fit)
+
+fit<- lm(gmat_tot ~.,data=placed)
+summary(fit)
+
+fit <- lm(work_yrs ~.,data=placed)
+summary(fit)
+
+#Comparison with those not placed
+notplaced <- MBAss.df[ which(MBAss.df$salary ==0) , ]
+View(notplaced)
+
+mytable <- xtabs( ~gmat_tot + sex, data = notplaced)
+mytable
+addmargins(mytable)
+
+table(notplaced$sex)
+
+# satis and gender
+mytable<- xtabs(~notplaced$satis +notplaced$sex)
+mytable
+chisq.test(mytable)
+
+#gender and age
+mytable<-xtabs(~notplaced$age+notplaced$sex)
+mytable
+chisq.test(mytable)
+ 
+#gender and language
+mytable<- xtabs( ~notplaced$frstlang +notplaced$sex)
+mytable
+chisq.test(mytable)
+
+# quarter and language
+mytable<- xtabs(~notplaced$quarter +notplaced$frstlang)
+mytable
+chisq.test(mytable)
+
+#gender and quarter
+mytable<- xtabs(~notplaced$quarter +notplaced$sex)
+mytable
+chisq.test(mytable)
+
+#challenge
+training.data.raw <- read.csv('MBA Starting Salaries Data.csv',header=T,na.strings=c(""))
+sapply(training.data.raw,function(x) sum(is.na(x)))
+sapply(training.data.raw, function(x) length(unique(x))) 
+#for missing values
+library(Amelia)
+missmap(training.data.raw, main = "Missing values vs observed")
+is.factor(MBAss.df$sex)
+is.factor(MBAss.df$age)
+
+data <- MBAss.df[!is.na(notplaced$gmat_tot),]
+rownames(data) <- NULL
+
+train <- data[1:700,]
+test <- data[700:750,]
+model <- glm( gmat_tot~.,data=MBAss.df)
+summary(model)
+
+anova(model, test="Chisq")
+
+
+
