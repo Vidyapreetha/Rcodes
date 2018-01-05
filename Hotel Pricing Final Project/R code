@@ -1,0 +1,1230 @@
+#   Project   Title: Hotel Pricing in India
+# NAME : Vidya Preetha Anandamurali
+#Analysis of Individual Cities(The analysis for the combined csv file along with regression is given below the set of 42 individual cities' analysis)
+#mumbai
+mumbai.df <- read.csv(paste("0 Mumbai.csv", sep="")) #to read the file
+View(mumbai.df)
+summary(mumbai.df)
+table(mumbai.df$HotelName)
+library(lattice)
+barchart(HotelName~RoomRent,data = mumbai.df)
+
+barchart(HotelName~ StarRating,data=mumbai.df)
+dim(mumbai.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=mumbai.df,horizontal = TRUE)
+
+table(mumbai.df$HotelName, mumbai.df$FreeWifi&mumbai.df$FreeBreakfast)
+table(mumbai.df$HotelName , mumbai.df$IsNewYearEve|mumbai.df$IsWeekend)
+par(mfrow=c(3,1))
+with(mumbai.df,plot(mumbai.df$Airport , mumbai.df$RoomRent))
+with(mumbai.df,plot(mumbai.df$FreeWifi&mumbai.df$FreeBreakfast , mumbai.df$RoomRent))
+with(mumbai.df,plot(mumbai.df$IsNewYearEve|mumbai.df$IsWeekend,mumbai.df$RoomRent))
+mumbai.df[1:5]<- list(NULL)
+mumbai.df[3]<- NULL
+mumbai.df[7:9] <- list(NULL)
+mumbai.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(mumbai.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(mumbai.df[,c(1,2,4,5,6,7,8)])
+
+
+
+myfit<- lm(RoomRent~ StarRating+ Airport,data=mumbai.df)
+summary(myfit)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=mumbai.df)
+summary(lfit)
+
+lfit<- lm(RoomRent~ Date + HotelName + StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=mumbai.df)
+summary(lfit)
+
+#Delhi
+delhi.df <- read.csv(paste("1 Delhi.csv", sep="")) #to read the file
+View(delhi.df)
+summary(delhi.df)
+barchart(HotelName~RoomRent,data = delhi.df)
+barchart(HotelName~ StarRating,data=delhi.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=delhi.df,horizontal = TRUE)
+
+table(delhi.df$HotelName, delhi.df$FreeWifi&delhi.df$FreeBreakfast)
+table(delhi.df$HotelName , delhi.df$IsNewYearEve|delhi.df$IsWeekend)
+par(mfrow=c(3,1))
+with(delhi.df,plot(delhi.df$Airport , delhi.df$RoomRent))
+with(delhi.df,plot(delhi.df$FreeWifi&delhi.df$FreeBreakfast , delhi.df$RoomRent))
+with(delhi.df,plot(delhi.df$IsNewYearEve|delhi.df$IsWeekend,delhi.df$RoomRent))
+delhi.df[1:5]<- list(NULL)
+delhi.df[3]<- NULL
+delhi.df[7:9] <- list(NULL)
+delhi.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(delhi.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(delhi.df[,c(1,2,4,5,6,7,8)])
+
+
+
+table(delhi.df$HotelName)
+
+myfit<- lm(RoomRent~ StarRating+ Airport,data=delhi.df)
+summary(myfit)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=delhi.df)
+summary(lfit)
+
+lfit<- lm(RoomRent~ Date + HotelName + StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=delhi.df)
+summary(lfit)
+
+#Thrissur
+thrissur.df <- read.csv(paste("10 Thrissur.csv", sep="")) #to read the file
+View(thrissur.df)
+summary(thrissur.df)
+dim(thrissur.df)
+barchart(HotelName~ StarRating,data=thrissur.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=thrissur.df,horizontal = TRUE)
+
+table(thrissur.df$HotelName, thrissur.df$FreeWifi&thrissur.df$FreeBreakfast)
+table(thrissur.df$HotelName , thrissur.df$IsNewYearEve|thrissur.df$IsWeekend)
+par(mfrow=c(3,1))
+with(thrissur.df,plot(thrissur.df$Airport , thrissur.df$RoomRent))
+with(thrissur.df,plot(thrissur.df$FreeWifi&thrissur.df$FreeBreakfast , thrissur.df$RoomRent))
+with(thrissur.df,plot(thrissur.df$IsNewYearEve|thrissur.df$IsWeekend,thrissur.df$RoomRent))
+thrissur.df[1:5]<- list(NULL)
+thrissur.df[3]<- NULL
+thrissur.df[7:9] <- list(NULL)
+thrissur.df[9:10]<- list(NULL)
+thrissur.df[7]<- NULL
+
+library(corrgram)
+corrgram(thrissur.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(thrissur.df[,c(1,2,4,5,6,7)])
+
+
+
+
+myfit<- lm(RoomRent~ StarRating+ Airport,data=thrissur.df)
+summary(myfit)
+
+
+lfit<- lm(RoomRent~ Date + HotelName + StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=delhi.df)
+summary(lfit)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=delhi.df)
+summary(lfit)
+
+#lucknow
+lucknow.df <- read.csv(paste("11 Lucknow.csv", sep="")) #to read the file
+View(lucknow.df)
+summary(lucknow.df)
+dim(lucknow.df)
+barchart(HotelName~ StarRating,data=lucknow.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=lucknow.df,horizontal = TRUE)
+
+table(lucknow.df$HotelName, lucknow.df$FreeWifi&lucknow.df$FreeBreakfast)
+table(lucknow.df$HotelName , lucknow.df$IsNewYearEve|lucknow.df$IsWeekend)
+par(mfrow=c(3,1))
+with(lucknow.df,plot(lucknow.df$Airport , lucknow.df$RoomRent))
+with(lucknow.df,plot(lucknow.df$FreeWifi&lucknow.df$FreeBreakfast , lucknow.df$RoomRent))
+with(lucknow.df,plot(lucknow.df$IsNewYearEve|lucknow.df$IsWeekend,lucknow.df$RoomRent))
+lucknow.df[1:5]<- list(NULL)
+lucknow.df[3]<- NULL
+lucknow.df[7:9] <- list(NULL)
+lucknow.df[9:10]<- list(NULL)
+lucknow.df[7]<- NULL
+
+library(corrgram)
+corrgram(lucknow.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(lucknow.df[,c(1,2,4,5,6,7)])
+
+
+
+
+myfit<- lm(RoomRent~ StarRating+ Airport,data=lucknow.df)
+summary(myfit)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=lucknow.df)
+summary(lfit)
+library(lattice)
+barchart(HotelName~RoomRent,data = lucknow.df)
+
+
+lfit<- lm(RoomRent~ Date + HotelName + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=lucknow.df)
+summary(lfit)
+
+#Kanpur
+kanpur.df <- read.csv(paste("12 Kanpur.csv", sep="")) #to read the file
+View(kanpur.df)
+summary(kanpur.df)
+barchart(HotelName~RoomRent,data = kanpur.df)
+dim(kanpur.df)
+barchart(HotelName~ StarRating,data=kanpur.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=kanpur.df,horizontal = TRUE)
+
+table(kanpur.df$HotelName, kanpur.df$FreeWifi&kanpur.df$FreeBreakfast)
+table(kanpur.df$HotelName , kanpur.df$IsNewYearEve|kanpur.df$IsWeekend)
+par(mfrow=c(3,1))
+with(kanpur.df,plot(kanpur.df$Airport , kanpur.df$RoomRent))
+with(kanpur.df,plot(kanpur.df$FreeWifi&kanpur.df$FreeBreakfast , kanpur.df$RoomRent))
+with(kanpur.df,plot(kanpur.df$IsNewYearEve|kanpur.df$IsWeekend,kanpur.df$RoomRent))
+kanpur.df[1:5]<- list(NULL)
+kanpur.df[3]<- NULL
+kanpur.df[7:9] <- list(NULL)
+kanpur.df[9:10]<- list(NULL)
+kanpur.df[5]<- NULL
+kanpur.df[6:7] <- list(NULL)
+
+library(corrgram)
+corrgram(kanpur.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(kanpur.df[,c(1,2,4,5)])
+
+
+
+
+lfit<- lm(RoomRent~ Date + HotelName+ IsWeekend +HotelPincode + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast+HotelDescription +HotelCapacity+HasSwimmingPool,data=kanpur.df)
+summary(lfit)
+
+git<- lm(RoomRent~ HotelDescription, data = kanpur.df)
+summary(git)
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=kanpur.df)
+summary(lfit)
+# amritsar
+amritsar.df <- read.csv(paste("13 Amritsar.csv", sep="")) #to read the file
+View(amritsar.df)
+summary(amritsar.df)
+barchart(HotelName~RoomRent,data = amritsar.df)
+barchart(HotelName~StarRating,data = amritsar.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=amritsar.df,horizontal = TRUE)
+
+table(amritsar.df$HotelName, amritsar.df$FreeWifi&amritsar.df$FreeBreakfast)
+table(amritsar.df$HotelName , amritsar.df$IsNewYearEve|amritsar.df$IsWeekend)
+par(mfrow=c(3,1))
+with(amritsar.df,plot(amritsar.df$Airport , amritsar.df$RoomRent))
+with(amritsar.df,plot(amritsar.df$FreeWifi&amritsar.df$FreeBreakfast , amritsar.df$RoomRent))
+with(amritsar.df,plot(amritsar.df$IsNewYearEve|amritsar.df$IsWeekend,amritsar.df$RoomRent))
+amritsar.df[1:5]<- list(NULL)
+amritsar.df[3]<- NULL
+amritsar.df[7:9] <- list(NULL)
+amritsar.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(amritsar.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(amritsar.df[,c(1,2,4,5,6,7,8)])
+
+
+
+lfit<- lm(RoomRent~ Date + HotelName+ IsWeekend + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=amritsar.df)
+summary(lfit)
+
+has <- amritsar.df[ which(amritsar.df$FreeWifi=='1' & amritsar.df$FreeBreakfast=='1') , ] 
+View(has)
+median(has$RoomRent)
+
+doesnthave<- amritsar.df[ which(amritsar.df$FreeWifi=='0' & amritsar.df$FreeBreakfast=='0') , ] 
+median(doesnthave$RoomRent)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=amritsar.df)
+summary(lfit)
+#indore
+indore.df <- read.csv(paste("14 Indore.csv", sep="")) #to read the file
+View(indore.df)
+summary(indore.df)
+barchart(HotelName~RoomRent,data = indore.df)
+barchart(HotelName~StarRating,data = indore.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=indore.df,horizontal = TRUE)
+
+table(indore.df$HotelName, indore.df$FreeWifi&indore.df$FreeBreakfast)
+table(indore.df$HotelName , indore.df$IsNewYearEve|indore.df$IsWeekend)
+par(mfrow=c(3,1))
+with(indore.df,plot(indore.df$Airport , indore.df$RoomRent))
+with(indore.df,plot(indore.df$FreeWifi&indore.df$FreeBreakfast , indore.df$RoomRent))
+with(indore.df,plot(indore.df$IsNewYearEve|indore.df$IsWeekend,indore.df$RoomRent))
+indore.df[1:5]<- list(NULL)
+indore.df[3]<- NULL
+indore.df[7:9] <- list(NULL)
+indore.df[9:10]<- list(NULL)
+indore.df[7]<- NULL
+
+library(corrgram)
+corrgram(indore.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(indore.df[,c(1,2,4,5,6,7)])
+
+lfit<- lm(RoomRent~ Date + HotelName+ IsWeekend + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=indore.df)
+summary(lfit)
+
+summary(indore.df)
+has <- indore.df[ which(indore.df$FreeWifi=='1' & indore.df$FreeBreakfast=='1' & indore.df$HasSwimmingPool=="1") , ] 
+View(has)
+median(has$RoomRent)
+
+doesnthave<- indore.df[ which(indore.df$FreeBreakfast=='0') , ] 
+median(doesnthave$RoomRent)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=indore.df)
+summary(lfit)
+summary(lfit)
+#agra
+agra.df <- read.csv(paste("16 Agra.csv", sep="")) #to read the file
+View(agra.df)
+summary(agra.df)
+barchart(HotelName~RoomRent,data = agra.df)
+barchart(HotelName~StarRating,data = agra.df)
+bwplot(HotelName ~Airport,data=agra.df,horizontal = TRUE)
+
+table(agra.df$HotelName, agra.df$FreeWifi&agra.df$FreeBreakfast)
+table(agra.df$HotelName , agra.df$IsNewYearEve|agra.df$IsWeekend)
+par(mfrow=c(3,1))
+with(agra.df,plot(agra.df$Airport , agra.df$RoomRent))
+with(agra.df,plot(agra.df$FreeWifi&agra.df$FreeBreakfast , agra.df$RoomRent))
+with(agra.df,plot(agra.df$IsNewYearEve|agra.df$IsWeekend,agra.df$RoomRent))
+agra.df[1:5]<- list(NULL)
+agra.df[3]<- NULL
+agra.df[7:9] <- list(NULL)
+agra.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(agra.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(agra.df[,c(1,2,4,5,6,7,8)])
+
+
+
+lfit<- lm(RoomRent~ Date + HotelName+ IsWeekend + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=agra.df)
+summary(lfit)
+
+has <- agra.df[ which(agra.df$FreeWifi=='1' & agra.df$FreeBreakfast=='1') , ] 
+View(has)
+median(has$RoomRent)
+
+doesnthave<- agra.df[ which(agra.df$FreeWifi=='0' & agra.df$FreeBreakfast=='0') , ] 
+median(doesnthave$RoomRent)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=agra.df)
+summary(lfit)
+
+has <- agra.df[ which(agra.df$StarRating<3) , ] 
+View(has)
+median(has$RoomRent)
+#madurai
+madurai.df <- read.csv(paste("17 Madurai.csv", sep="")) #to read the file
+View(madurai.df)
+summary(madurai.df)
+barchart(HotelName~RoomRent,data = madurai.df)
+barchart(HotelName~StarRating,data = madurai.df)
+bwplot(HotelName ~Airport,data=madurai.df,horizontal = TRUE)
+
+table(madurai.df$HotelName, madurai.df$FreeWifi&madurai.df$FreeBreakfast)
+table(madurai.df$HotelName , madurai.df$IsNewYearEve|madurai.df$IsWeekend)
+par(mfrow=c(3,1))
+with(madurai.df,plot(madurai.df$Airport , madurai.df$RoomRent))
+with(madurai.df,plot(madurai.df$FreeWifi&madurai.df$FreeBreakfast , madurai.df$RoomRent))
+with(madurai.df,plot(madurai.df$IsNewYearEve|madurai.df$IsWeekend,madurai.df$RoomRent))
+madurai.df[1:5]<- list(NULL)
+madurai.df[3]<- NULL
+madurai.df[7:9] <- list(NULL)
+madurai.df[9:10]<- list(NULL)
+madurai.df[7:8] <- list(NULL)
+
+library(corrgram)
+corrgram(madurai.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(madurai.df[,c(1,2,4,5,6)])
+
+
+
+lfit<- lm(RoomRent~ Date + HotelName+ IsWeekend + IsNewYearEve+ StarRating + Airport + FreeWifi+FreeBreakfast +HotelCapacity+HasSwimmingPool,data=madurai.df)
+summary(lfit)
+
+has <- madurai.df[ which(madurai.df$FreeWifi=='1' & madurai.df$FreeBreakfast=='1') , ] 
+View(has)
+median(has$RoomRent)
+
+doesnthave<- madurai.df[ which(madurai.df$FreeWifi=='0' & madurai.df$FreeBreakfast=='0') , ] 
+median(doesnthave$RoomRent)
+
+lfit<- lm(RoomRent~ IsWeekend + IsNewYearEve,data=madurai.df)
+summary(lfit)
+has <- madurai.df[ which(madurai.df$StarRating<3) , ] 
+View(has)
+median(has$RoomRent)
+#goa
+goa.df <- read.csv(paste("18 Goa.csv", sep="")) #to read the file
+View(goa.df)
+summary(goa.df)
+dim(goa.df)
+barchart(HotelName~ StarRating,data=goa.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=goa.df,horizontal = TRUE)
+
+table(goa.df$HotelName, goa.df$FreeWifi&goa.df$FreeBreakfast)
+table(goa.df$HotelName , goa.df$IsNewYearEve|goa.df$IsWeekend)
+
+par(mfrow=c(3,1))
+with(goa.df,plot(goa.df$Airport , goa.df$RoomRent))
+with(goa.df,plot(goa.df$FreeWifi&goa.df$FreeBreakfast , goa.df$RoomRent))
+with(goa.df,plot(goa.df$IsNewYearEve|goa.df$IsWeekend,goa.df$RoomRent))
+
+goa.df[1:5]<- list(NULL)
+goa.df[3]<- NULL
+goa.df[7:9] <- list(NULL)
+goa.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(goa.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+
+cor(goa.df$RoomRent,y=goa.df$IsNewYearEve,use="everything",method=c("spearman"))
+cor(goa.df[,c(1,2,4,5,6,7,8)])
+#rajkot
+rajkot.df <- read.csv(paste("19 Rajkot.csv", sep="")) #to read the file
+View(rajkot.df)
+summary(rajkot.df)
+dim(rajkot.df)
+barchart(HotelName~ StarRating,data=rajkot.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=rajkot.df,horizontal = TRUE)
+
+table(rajkot.df$HotelName, rajkot.df$FreeWifi&rajkot.df$FreeBreakfast)
+table(rajkot.df$HotelName , rajkot.df$IsNewYearEve|rajkot.df$IsWeekend)
+par(mfrow=c(3,1))
+with(rajkot.df,plot(rajkot.df$Airport , rajkot.df$RoomRent))
+with(rajkot.df,plot(rajkot.df$FreeWifi&rajkot.df$FreeBreakfast , rajkot.df$RoomRent))
+with(rajkot.df,plot(rajkot.df$IsNewYearEve|rajkot.df$IsWeekend,rajkot.df$RoomRent))
+rajkot.df[1:5]<- list(NULL)
+rajkot.df[3]<- NULL
+rajkot.df[7:9] <- list(NULL)
+rajkot.df[9:10]<- list(NULL)
+rajkot.df[7:8]<- list(NULL)
+
+library(corrgram)
+corrgram(rajkot.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(rajkot.df[,c(1,2,4,5,6,7,8)])
+#bangalore
+
+bnglr.df <- read.csv(paste("2 Bangalore.csv", sep="")) #to read the file
+View(bnglr.df)
+summary(bnglr.df)
+dim(bnglr.df)
+barchart(HotelName~ StarRating,data=bnglr.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=bnglr.df,horizontal = TRUE)
+
+table(bnglr.df$HotelName, bnglr.df$FreeWifi&bnglr.df$FreeBreakfast)
+table(bnglr.df$HotelName , bnglr.df$IsNewYearEve|bnglr.df$IsWeekend)
+par(mfrow=c(3,1))
+with(bnglr.df,plot(bnglr.df$Airport , bnglr.df$RoomRent))
+with(bnglr.df,plot(bnglr.df$FreeWifi&bnglr.df$FreeBreakfast , bnglr.df$RoomRent))
+with(bnglr.df,plot(bnglr.df$IsNewYearEve|bnglr.df$IsWeekend,bnglr.df$RoomRent))
+bnglr.df[1:5]<- list(NULL)
+bnglr.df[3]<- NULL
+bnglr.df[7:9] <- list(NULL)
+bnglr.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(bnglr.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(bnglr.df[,c(1,2,4,5,6,7,8)])
+
+#varanasi
+var.df <- read.csv(paste("20 Varanasi.csv", sep="")) #to read the file
+View(var.df)
+summary(var.df)
+dim(var.df)
+barchart(HotelName~ StarRating,data=var.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=var.df,horizontal = TRUE)
+
+table(var.df$HotelName, var.df$FreeWifi&var.df$FreeBreakfast)
+table(var.df$HotelName , var.df$IsNewYearEve|var.df$IsWeekend)
+par(mfrow=c(3,1))
+with(var.df,plot(var.df$Airport , var.df$RoomRent))
+with(var.df,plot(var.df$FreeWifi&var.df$FreeBreakfast , var.df$RoomRent))
+with(var.df,plot(var.df$IsNewYearEve|var.df$IsWeekend,var.df$RoomRent))
+var.df[1:5]<- list(NULL)
+var.df[3]<- NULL
+var.df[7:9] <- list(NULL)
+var.df[9:10]<- list(NULL)
+var.df[7]<- NULL
+library(corrgram)
+corrgram(var.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(var.df[,c(1,2,4,5,6,7)])
+#srinagar
+srinagar.df <- read.csv(paste("21 Srinagar.csv", sep="")) #to read the file
+View(srinagar.df)
+summary(srinagar.df)
+dim(srinagar.df)
+barchart(HotelName~ StarRating,data=srinagar.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=srinagar.df,horizontal = TRUE)
+
+table(srinagar.df$HotelName, srinagar.df$FreeWifi&srinagar.df$FreeBreakfast)
+table(srinagar.df$HotelName , srinagar.df$IsNewYearEve|srinagar.df$IsWeekend)
+par(mfrow=c(3,1))
+with(srinagar.df,plot(srinagar.df$Airport , srinagar.df$RoomRent))
+with(srinagar.df,plot(srinagar.df$FreeWifi&srinagar.df$FreeBreakfast , srinagar.df$RoomRent))
+with(srinagar.df,plot(srinagar.df$IsNewYearEve|srinagar.df$IsWeekend,srinagar.df$RoomRent))
+srinagar.df[1:5]<- list(NULL)
+srinagar.df[3]<- NULL
+srinagar.df[7:9] <- list(NULL)
+srinagar.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(srinagar.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(srinagar.df[,c(1,2,4,5,6,7,8)])
+
+#jodhpur
+jodhpur.df <- read.csv(paste("22 Jodhpur.csv", sep="")) #to read the file
+View(jodhpur.df)
+summary(jodhpur.df)
+dim(jodhpur.df)
+barchart(HotelName~ StarRating,data=jodhpur.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=jodhpur.df,horizontal = TRUE)
+
+table(jodhpur.df$HotelName, jodhpur.df$FreeWifi&jodhpur.df$FreeBreakfast)
+table(jodhpur.df$HotelName , jodhpur.df$IsNewYearEve|jodhpur.df$IsWeekend)
+par(mfrow=c(3,1))
+with(jodhpur.df,plot(jodhpur.df$Airport , jodhpur.df$RoomRent))
+with(jodhpur.df,plot(jodhpur.df$FreeWifi&jodhpur.df$FreeBreakfast , jodhpur.df$RoomRent))
+with(jodhpur.df,plot(jodhpur.df$IsNewYearEve|jodhpur.df$IsWeekend,jodhpur.df$RoomRent))
+jodhpur.df[1:5]<- list(NULL)
+jodhpur.df[3]<- NULL
+jodhpur.df[7:9] <- list(NULL)
+jodhpur.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(jodhpur.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(jodhpur.df[,c(1,2,4,5,6,7,8)])
+
+#Chandigarh
+chandigarh.df <- read.csv(paste("23 Chandigarh.csv", sep="")) #to read the file
+View(chandigarh.df)
+summary(chandigarh.df)
+dim(chandigarh.df)
+barchart(HotelName~ StarRating,data=chandigarh.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=chandigarh.df,horizontal = TRUE)
+
+table(chandigarh.df$HotelName, chandigarh.df$FreeWifi&chandigarh.df$FreeBreakfast)
+table(chandigarh.df$HotelName , chandigarh.df$IsNewYearEve|chandigarh.df$IsWeekend)
+par(mfrow=c(3,1))
+with(chandigarh.df,plot(chandigarh.df$Airport , chandigarh.df$RoomRent))
+with(chandigarh.df,plot(chandigarh.df$FreeWifi&chandigarh.df$FreeBreakfast , chandigarh.df$RoomRent))
+with(chandigarh.df,plot(chandigarh.df$IsNewYearEve|chandigarh.df$IsWeekend,chandigarh.df$RoomRent))
+chandigarh.df[1:5]<- list(NULL)
+chandigarh.df[3]<- NULL
+chandigarh.df[7:9] <- list(NULL)
+chandigarh.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(chandigarh.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(chandigarh.df[,c(1,2,4,5,6,7,8)])
+
+#Guwahati
+guwahati.df <- read.csv(paste("25 Guwahati.csv", sep="")) #to read the file
+View(guwahati.df)
+summary(guwahati.df)
+dim(guwahati.df)
+barchart(HotelName~ StarRating,data=guwahati.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=guwahati.df,horizontal = TRUE)
+
+table(guwahati.df$HotelName, guwahati.df$FreeWifi&guwahati.df$FreeBreakfast)
+table(guwahati.df$HotelName , guwahati.df$IsNewYearEve|guwahati.df$IsWeekend)
+par(mfrow=c(3,1))
+with(guwahati.df,plot(guwahati.df$Airport , guwahati.df$RoomRent))
+with(guwahati.df,plot(guwahati.df$FreeWifi&guwahati.df$FreeBreakfast , guwahati.df$RoomRent))
+with(guwahati.df,plot(guwahati.df$IsNewYearEve|guwahati.df$IsWeekend,guwahati.df$RoomRent))
+guwahati.df[1:5]<- list(NULL)
+guwahati.df[3]<- NULL
+guwahati.df[7:9] <- list(NULL)
+guwahati.df[9:10]<- list(NULL)
+guwahati.df[7]<- NULL
+
+library(corrgram)
+corrgram(guwahati.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(guwahati.df[,c(1,2,4,5,6,7)])
+
+#mysore
+mysore.df <- read.csv(paste("26 Mysore.csv", sep="")) #to read the file
+View(mysore.df)
+summary(mysore.df)
+dim(mysore.df)
+barchart(HotelName~ StarRating,data=mysore.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=mysore.df,horizontal = TRUE)
+
+table(mysore.df$HotelName, mysore.df$FreeWifi&mysore.df$FreeBreakfast)
+table(mysore.df$HotelName , mysore.df$IsNewYearEve|mysore.df$IsWeekend)
+par(mfrow=c(3,1))
+with(mysore.df,plot(mysore.df$Airport , mysore.df$RoomRent))
+with(mysore.df,plot(mysore.df$FreeWifi&mysore.df$FreeBreakfast , mysore.df$RoomRent))
+with(mysore.df,plot(mysore.df$IsNewYearEve|mysore.df$IsWeekend,mysore.df$RoomRent))
+mysore.df[1:5]<- list(NULL)
+mysore.df[3]<- NULL
+mysore.df[7:9] <- list(NULL)
+mysore.df[9:10]<- list(NULL)
+mysore.df[7]<- NULL
+
+library(corrgram)
+corrgram(mysore.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(mysore.df[,c(1,2,4,5,6,7)])
+
+#Bhubaneshwar
+
+bhubaneshwar.df <- read.csv(paste("27 Bhubaneshwar.csv", sep="")) #to read the file
+View(bhubaneshwar.df)
+summary(bhubaneshwar.df)
+dim(bhubaneshwar.df)
+barchart(HotelName~ StarRating,data=bhubaneshwar.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=bhubaneshwar.df,horizontal = TRUE)
+
+table(bhubaneshwar.df$HotelName, bhubaneshwar.df$FreeWifi&bhubaneshwar.df$FreeBreakfast)
+table(bhubaneshwar.df$HotelName , bhubaneshwar.df$IsNewYearEve|bhubaneshwar.df$IsWeekend)
+par(mfrow=c(3,1))
+with(bhubaneshwar.df,plot(bhubaneshwar.df$Airport , bhubaneshwar.df$RoomRent))
+with(bhubaneshwar.df,plot(bhubaneshwar.df$FreeWifi&bhubaneshwar.df$FreeBreakfast , bhubaneshwar.df$RoomRent))
+with(bhubaneshwar.df,plot(bhubaneshwar.df$IsNewYearEve|bhubaneshwar.df$IsWeekend,bhubaneshwar.df$RoomRent))
+bhubaneshwar.df[1:5]<- list(NULL)
+bhubaneshwar.df[3]<- NULL
+bhubaneshwar.df[7:9] <- list(NULL)
+bhubaneshwar.df[9:10]<- list(NULL)
+bhubaneshwar.df[6]<- NULL
+
+library(corrgram)
+corrgram(bhubaneshwar.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(bhubaneshwar.df[,c(1,2,3,4,5)])
+
+#thiruvananthapuram
+thiruvananthapuram.df <- read.csv(paste("24 Thiruvanthipuram.csv", sep="")) #to read the file
+View(thiruvananthapuram.df)
+summary(thiruvananthapuram.df)
+dim(thiruvananthapuram.df)
+barchart(HotelName~ StarRating,data=thiruvananthapuram.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=thiruvananthapuram.df,horizontal = TRUE)
+
+table(thiruvananthapuram.df$HotelName, thiruvananthapuram.df$FreeWifi&thiruvananthapuram.df$FreeBreakfast)
+table(thiruvananthapuram.df$HotelName , thiruvananthapuram.df$IsNewYearEve|thiruvananthapuram.df$IsWeekend)
+par(mfrow=c(3,1))
+with(thiruvananthapuram.df,plot(thiruvananthapuram.df$Airport , thiruvananthapuram.df$RoomRent))
+with(thiruvananthapuram.df,plot(thiruvananthapuram.df$FreeWifi&thiruvananthapuram.df$FreeBreakfast , thiruvananthapuram.df$RoomRent))
+with(thiruvananthapuram.df,plot(thiruvananthapuram.df$IsNewYearEve|thiruvananthapuram.df$IsWeekend,thiruvananthapuram.df$RoomRent))
+thiruvananthapuram.df[1:5]<- list(NULL)
+thiruvananthapuram.df[3]<- NULL
+thiruvananthapuram.df[7:9] <- list(NULL)
+thiruvananthapuram.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(thiruvananthapuram.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(thiruvananthapuram.df[,c(1,2,4,5,6,7,8)])
+
+#Kochi
+kochi.df <- read.csv(paste("28 Kochi.csv", sep="")) #to read the file
+View(kochi.df)
+summary(kochi.df)
+dim(kochi.df)
+barchart(HotelName~ StarRating,data=kochi.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=kochi.df,horizontal = TRUE)
+
+table(kochi.df$HotelName, kochi.df$FreeWifi&kochi.df$FreeBreakfast)
+table(kochi.df$HotelName , kochi.df$IsNewYearEve|kochi.df$IsWeekend)
+par(mfrow=c(3,1))
+with(kochi.df,plot(kochi.df$Airport , kochi.df$RoomRent))
+with(kochi.df,plot(kochi.df$FreeWifi&kochi.df$FreeBreakfast , kochi.df$RoomRent))
+with(kochi.df,plot(kochi.df$IsNewYearEve|kochi.df$IsWeekend,kochi.df$RoomRent))
+kochi.df[1:5]<- list(NULL)
+kochi.df[3]<- NULL
+kochi.df[7:9] <- list(NULL)
+kochi.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(kochi.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(kochi.df[,c(1,2,4,5,6,7,8)])
+
+#mangalore
+mangalore.df <- read.csv(paste("29 Mangalore.csv", sep="")) #to read the file
+View(mangalore.df)
+summary(mangalore.df)
+dim(mangalore.df)
+barchart(HotelName~ StarRating,data=mangalore.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=mangalore.df,horizontal = TRUE)
+
+table(mangalore.df$HotelName, mangalore.df$FreeWifi&mangalore.df$FreeBreakfast)
+table(mangalore.df$HotelName , mangalore.df$IsNewYearEve|mangalore.df$IsWeekend)
+par(mfrow=c(3,1))
+with(mangalore.df,plot(mangalore.df$Airport , mangalore.df$RoomRent))
+with(mangalore.df,plot(mangalore.df$FreeWifi&mangalore.df$FreeBreakfast , mangalore.df$RoomRent))
+with(mangalore.df,plot(mangalore.df$IsNewYearEve|mangalore.df$IsWeekend,mangalore.df$RoomRent))
+mangalore.df[1:5]<- list(NULL)
+mangalore.df[3]<- NULL
+mangalore.df[7:9] <- list(NULL)
+mangalore.df[9:10]<- list(NULL)
+mangalore.df[7]<- NULL
+
+library(corrgram)
+corrgram(mangalore.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(mangalore.df[,c(1,2,4,5,6,7)])
+
+#Chennai
+chennai.df <- read.csv(paste("3 Chennai.csv", sep="")) #to read the file
+View(chennai.df)
+summary(chennai.df)
+dim(chennai.df)
+barchart(HotelName~ StarRating,data=chennai.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=chennai.df,horizontal = TRUE)
+
+table(chennai.df$HotelName, chennai.df$FreeWifi&chennai.df$FreeBreakfast)
+table(chennai.df$HotelName , chennai.df$IsNewYearEve|chennai.df$IsWeekend)
+par(mfrow=c(3,1))
+with(chennai.df,plot(chennai.df$Airport , chennai.df$RoomRent))
+with(chennai.df,plot(chennai.df$FreeWifi&chennai.df$FreeBreakfast , chennai.df$RoomRent))
+with(chennai.df,plot(chennai.df$IsNewYearEve|chennai.df$IsWeekend,chennai.df$RoomRent))
+chennai.df[1:5]<- list(NULL)
+chennai.df[3]<- NULL
+chennai.df[7:9] <- list(NULL)
+chennai.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(chennai.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(chennai.df[,c(1,2,4,5,6,7,8)])
+
+#Udaipur
+udaipur.df <- read.csv(paste("30 Udaipur.csv", sep="")) #to read the file
+View(udaipur.df)
+summary(udaipur.df)
+dim(udaipur.df)
+barchart(HotelName~ StarRating,data=udaipur.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=udaipur.df,horizontal = TRUE)
+
+table(udaipur.df$HotelName, udaipur.df$FreeWifi&udaipur.df$FreeBreakfast)
+table(udaipur.df$HotelName , udaipur.df$IsNewYearEve|udaipur.df$IsWeekend)
+par(mfrow=c(3,1))
+with(udaipur.df,plot(udaipur.df$Airport , udaipur.df$RoomRent))
+with(udaipur.df,plot(udaipur.df$FreeWifi&udaipur.df$FreeBreakfast , udaipur.df$RoomRent))
+with(udaipur.df,plot(udaipur.df$IsNewYearEve|udaipur.df$IsWeekend,udaipur.df$RoomRent))
+udaipur.df[1:5]<- list(NULL)
+udaipur.df[3]<- NULL
+udaipur.df[7:9] <- list(NULL)
+udaipur.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(udaipur.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(udaipur.df[,c(1,2,4,5,6,7,8)])
+
+#Haridwar
+haridwar.df <- read.csv(paste("32 Haridwar.csv", sep="")) #to read the file
+View(haridwar.df)
+summary(haridwar.df)
+dim(haridwar.df)
+barchart(HotelName~ StarRating,data=haridwar.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=haridwar.df,horizontal = TRUE)
+
+table(haridwar.df$HotelName, haridwar.df$FreeWifi&haridwar.df$FreeBreakfast)
+table(haridwar.df$HotelName , haridwar.df$IsNewYearEve|haridwar.df$IsWeekend)
+par(mfrow=c(3,1))
+with(haridwar.df,plot(haridwar.df$Airport , haridwar.df$RoomRent))
+with(haridwar.df,plot(haridwar.df$FreeWifi&haridwar.df$FreeBreakfast , haridwar.df$RoomRent))
+with(haridwar.df,plot(haridwar.df$IsNewYearEve|haridwar.df$IsWeekend,haridwar.df$RoomRent))
+haridwar.df[1:5]<- list(NULL)
+haridwar.df[3]<- NULL
+haridwar.df[7:9] <- list(NULL)
+haridwar.df[9:10]<- list(NULL)
+haridwar.df[4]<- NULL
+
+library(corrgram)
+corrgram(haridwar.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(haridwar.df[,c(1,2,3,5,6,7)])
+
+#Puri
+puri.df <- read.csv(paste("33 Puri.csv", sep="")) #to read the file
+View(puri.df)
+summary(puri.df)
+dim(puri.df)
+barchart(HotelName~ StarRating,data=puri.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=puri.df,horizontal = TRUE)
+
+table(puri.df$HotelName, puri.df$FreeWifi&puri.df$FreeBreakfast)
+table(puri.df$HotelName , puri.df$IsNewYearEve|puri.df$IsWeekend)
+par(mfrow=c(3,1))
+with(puri.df,plot(puri.df$Airport , puri.df$RoomRent))
+with(puri.df,plot(puri.df$FreeWifi&puri.df$FreeBreakfast , puri.df$RoomRent))
+with(puri.df,plot(puri.df$IsNewYearEve|puri.df$IsWeekend,puri.df$RoomRent))
+puri.df[1:5]<- list(NULL)
+puri.df[3]<- NULL
+puri.df[7:9] <- list(NULL)
+puri.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(puri.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(puri.df[,c(1,2,4,5,6,7,8)])
+
+#Shimla
+shimla.df <- read.csv(paste("34 Shimla.csv", sep="")) #to read the file
+View(shimla.df)
+summary(shimla.df)
+dim(shimla.df)
+barchart(HotelName~ StarRating,data=shimla.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=shimla.df,horizontal = TRUE)
+
+table(shimla.df$HotelName, shimla.df$FreeWifi&shimla.df$FreeBreakfast)
+table(shimla.df$HotelName , shimla.df$IsNewYearEve|shimla.df$IsWeekend)
+par(mfrow=c(3,1))
+with(shimla.df,plot(shimla.df$Airport , shimla.df$RoomRent))
+with(shimla.df,plot(shimla.df$FreeWifi&shimla.df$FreeBreakfast , shimla.df$RoomRent))
+with(shimla.df,plot(shimla.df$IsNewYearEve|shimla.df$IsWeekend,shimla.df$RoomRent))
+shimla.df[1:5]<- list(NULL)
+shimla.df[3]<- NULL
+shimla.df[7:9] <- list(NULL)
+shimla.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(shimla.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(shimla.df[,c(1,2,4,5,6,7,8)])
+
+#Panchkula
+panchkula.df <- read.csv(paste("35 Panchkula.csv", sep="")) #to read the file
+View(panchkula.df)
+summary(panchkula.df)
+dim(panchkula.df)
+barchart(HotelName~ StarRating,data=panchkula.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=panchkula.df,horizontal = TRUE)
+
+table(panchkula.df$HotelName, panchkula.df$FreeWifi&panchkula.df$FreeBreakfast)
+table(panchkula.df$HotelName , panchkula.df$IsNewYearEve|panchkula.df$IsWeekend)
+par(mfrow=c(3,1))
+with(panchkula.df,plot(panchkula.df$Airport , panchkula.df$RoomRent))
+with(panchkula.df,plot(panchkula.df$FreeWifi&panchkula.df$FreeBreakfast , panchkula.df$RoomRent))
+with(panchkula.df,plot(panchkula.df$IsNewYearEve|panchkula.df$IsWeekend,panchkula.df$RoomRent))
+panchkula.df[1:5]<- list(NULL)
+panchkula.df[3]<- NULL
+panchkula.df[7:9] <- list(NULL)
+panchkula.df[9:10]<- list(NULL)
+panchkula.df[7]<- NULL
+
+library(corrgram)
+corrgram(panchkula.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(panchkula.df[,c(1,2,4,5,6,7)])
+
+#Rishikesh
+rishikesh.df <- read.csv(paste("37 Rishikesh.csv", sep="")) #to read the file
+View(rishikesh.df)
+summary(rishikesh.df)
+dim(rishikesh.df)
+barchart(HotelName~ StarRating,data=rishikesh.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=rishikesh.df,horizontal = TRUE)
+
+table(rishikesh.df$HotelName, rishikesh.df$FreeWifi&rishikesh.df$FreeBreakfast)
+table(rishikesh.df$HotelName , rishikesh.df$IsNewYearEve|rishikesh.df$IsWeekend)
+par(mfrow=c(3,1))
+with(rishikesh.df,plot(rishikesh.df$Airport , rishikesh.df$RoomRent))
+with(rishikesh.df,plot(rishikesh.df$FreeWifi&rishikesh.df$FreeBreakfast , rishikesh.df$RoomRent))
+with(rishikesh.df,plot(rishikesh.df$IsNewYearEve|rishikesh.df$IsWeekend,rishikesh.df$RoomRent))
+rishikesh.df[1:5]<- list(NULL)
+rishikesh.df[3]<- NULL
+rishikesh.df[7:9] <- list(NULL)
+rishikesh.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(rishikesh.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(rishikesh.df[,c(1,2,4,5,6,7,8)])
+
+#darjeeling
+darjeeling.df <- read.csv(paste("36 Darjeeling.csv", sep="")) #to read the file
+View(darjeeling.df)
+summary(darjeeling.df)
+dim(darjeeling.df)
+barchart(HotelName~ StarRating,data=darjeeling.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=darjeeling.df,horizontal = TRUE)
+
+table(darjeeling.df$HotelName, darjeeling.df$FreeWifi&darjeeling.df$FreeBreakfast)
+table(darjeeling.df$HotelName , darjeeling.df$IsNewYearEve|darjeeling.df$IsWeekend)
+par(mfrow=c(3,1))
+with(darjeeling.df,plot(darjeeling.df$Airport , darjeeling.df$RoomRent))
+with(darjeeling.df,plot(darjeeling.df$FreeWifi&darjeeling.df$FreeBreakfast , darjeeling.df$RoomRent))
+with(darjeeling.df,plot(darjeeling.df$IsNewYearEve|darjeeling.df$IsWeekend,darjeeling.df$RoomRent))
+darjeeling.df[1:5]<- list(NULL)
+darjeeling.df[3]<- NULL
+darjeeling.df[7:9] <- list(NULL)
+darjeeling.df[9:10]<- list(NULL)
+darjeeling.df[7:8]<- list(NULL)
+
+library(corrgram)
+corrgram(darjeeling.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(darjeeling.df[,c(1,2,4,5,6)])
+
+#Gangtok
+gangtok.df <- read.csv(paste("38 Gangtok.csv", sep="")) #to read the file
+View(gangtok.df)
+summary(gangtok.df)
+dim(gangtok.df)
+barchart(HotelName~ StarRating,data=gangtok.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=gangtok.df,horizontal = TRUE)
+
+table(gangtok.df$HotelName, gangtok.df$FreeWifi&gangtok.df$FreeBreakfast)
+table(gangtok.df$HotelName , gangtok.df$IsNewYearEve|gangtok.df$IsWeekend)
+par(mfrow=c(3,1))
+with(gangtok.df,plot(gangtok.df$Airport , gangtok.df$RoomRent))
+with(gangtok.df,plot(gangtok.df$FreeWifi&gangtok.df$FreeBreakfast , gangtok.df$RoomRent))
+with(gangtok.df,plot(gangtok.df$IsNewYearEve|gangtok.df$IsWeekend,gangtok.df$RoomRent))
+gangtok.df[1:5]<- list(NULL)
+gangtok.df[3]<- NULL
+gangtok.df[7:9] <- list(NULL)
+gangtok.df[9:10]<- list(NULL)
+gangtok.df[6]<- NULL
+
+library(corrgram)
+corrgram(gangtok.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(gangtok.df[,c(1,2,4,5,6,7)])
+
+#ooty
+ooty.df <- read.csv(paste("39 Ooty.csv", sep="")) #to read the file
+View(ooty.df)
+summary(ooty.df)
+dim(ooty.df)
+barchart(HotelName~ StarRating,data=ooty.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=ooty.df,horizontal = TRUE)
+
+table(ooty.df$HotelName, ooty.df$FreeWifi&ooty.df$FreeBreakfast)
+table(ooty.df$HotelName , ooty.df$IsNewYearEve|ooty.df$IsWeekend)
+par(mfrow=c(3,1))
+with(ooty.df,plot(ooty.df$Airport , ooty.df$RoomRent))
+with(ooty.df,plot(ooty.df$FreeWifi&ooty.df$FreeBreakfast , ooty.df$RoomRent))
+with(ooty.df,plot(ooty.df$IsNewYearEve|ooty.df$IsWeekend,ooty.df$RoomRent))
+ooty.df[1:5]<- list(NULL)
+ooty.df[3]<- NULL
+ooty.df[7:9] <- list(NULL)
+ooty.df[9:10]<- list(NULL)
+ooty.df[6]<- NULL
+
+library(corrgram)
+corrgram(ooty.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(ooty.df[,c(1,2,4,5,6,7)])
+
+#Hyderabad
+hyderabad.df <- read.csv(paste("4 Hyderabad.csv", sep="")) #to read the file
+View(hyderabad.df)
+summary(hyderabad.df)
+dim(hyderabad.df)
+barchart(HotelName~ StarRating,data=hyderabad.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=hyderabad.df,horizontal = TRUE)
+
+table(hyderabad.df$HotelName, hyderabad.df$FreeWifi&hyderabad.df$FreeBreakfast)
+table(hyderabad.df$HotelName , hyderabad.df$IsNewYearEve|hyderabad.df$IsWeekend)
+par(mfrow=c(3,1))
+with(hyderabad.df,plot(hyderabad.df$Airport , hyderabad.df$RoomRent))
+with(hyderabad.df,plot(hyderabad.df$FreeWifi&hyderabad.df$FreeBreakfast , hyderabad.df$RoomRent))
+with(hyderabad.df,plot(hyderabad.df$IsNewYearEve|hyderabad.df$IsWeekend,hyderabad.df$RoomRent))
+hyderabad.df[1:5]<- list(NULL)
+hyderabad.df[3]<- NULL
+hyderabad.df[7:9] <- list(NULL)
+hyderabad.df[9:10]<- list(NULL)
+hyderabad.df[7]<- NULL
+
+library(corrgram)
+corrgram(hyderabad.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(hyderabad.df[,c(1,2,4,5,6,7)])
+
+#Jaisalmer
+jaisalmer.df <- read.csv(paste("40 Jaisalmer.csv", sep="")) #to read the file
+View(jaisalmer.df)
+summary(jaisalmer.df)
+dim(jaisalmer.df)
+barchart(HotelName~ StarRating,data=jaisalmer.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=jaisalmer.df,horizontal = TRUE)
+
+table(jaisalmer.df$HotelName, jaisalmer.df$FreeWifi&jaisalmer.df$FreeBreakfast)
+table(jaisalmer.df$HotelName , jaisalmer.df$IsNewYearEve|jaisalmer.df$IsWeekend)
+par(mfrow=c(3,1))
+with(jaisalmer.df,plot(jaisalmer.df$Airport , jaisalmer.df$RoomRent))
+with(jaisalmer.df,plot(jaisalmer.df$FreeWifi&jaisalmer.df$FreeBreakfast , jaisalmer.df$RoomRent))
+with(jaisalmer.df,plot(jaisalmer.df$IsNewYearEve|jaisalmer.df$IsWeekend,jaisalmer.df$RoomRent))
+jaisalmer.df[1:5]<- list(NULL)
+jaisalmer.df[3]<- NULL
+jaisalmer.df[7:9] <- list(NULL)
+jaisalmer.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(jaisalmer.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(jaisalmer.df[,c(1,2,4,5,6,7,8)])
+
+#Nainital
+nainital.df <- read.csv(paste("42 Nainital.csv", sep="")) #to read the file
+View(nainital.df)
+summary(nainital.df)
+dim(nainital.df)
+barchart(HotelName~ StarRating,data=nainital.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=nainital.df,horizontal = TRUE)
+
+table(nainital.df$HotelName, nainital.df$FreeWifi&nainital.df$FreeBreakfast)
+table(nainital.df$HotelName , nainital.df$IsNewYearEve|nainital.df$IsWeekend)
+par(mfrow=c(3,1))
+with(nainital.df,plot(nainital.df$Airport , nainital.df$RoomRent))
+with(nainital.df,plot(nainital.df$FreeWifi&nainital.df$FreeBreakfast , nainital.df$RoomRent))
+with(nainital.df,plot(nainital.df$IsNewYearEve|nainital.df$IsWeekend,nainital.df$RoomRent))
+nainital.df[1:5]<- list(NULL)
+nainital.df[3]<- NULL
+nainital.df[7:9] <- list(NULL)
+nainital.df[9:10]<- list(NULL)
+nainital.df[6]<- NULL
+
+library(corrgram)
+corrgram(nainital.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(nainital.df[,c(1,2,4,5,6,7)])
+
+#Munnar
+munnar.df <- read.csv(paste("43 Munnar.csv", sep="")) #to read the file
+View(munnar.df)
+summary(munnar.df)
+dim(munnar.df)
+barchart(HotelName~ StarRating,data=munnar.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=munnar.df,horizontal = TRUE)
+
+table(munnar.df$HotelName, munnar.df$FreeWifi&munnar.df$FreeBreakfast)
+table(munnar.df$HotelName , munnar.df$IsNewYearEve|munnar.df$IsWeekend)
+par(mfrow=c(3,1))
+with(munnar.df,plot(munnar.df$Airport , munnar.df$RoomRent))
+with(munnar.df,plot(munnar.df$FreeWifi&munnar.df$FreeBreakfast , munnar.df$RoomRent))
+with(munnar.df,plot(munnar.df$IsNewYearEve|munnar.df$IsWeekend,munnar.df$RoomRent))
+munnar.df[1:5]<- list(NULL)
+munnar.df[3]<- NULL
+munnar.df[7:9] <- list(NULL)
+munnar.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(munnar.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(munnar.df[,c(1,2,4,5,6,7,8)])
+
+#Manali
+manali.df <- read.csv(paste("44 Manali.csv", sep="")) #to read the file
+View(manali.df)
+summary(manali.df)
+dim(manali.df)
+barchart(HotelName~ StarRating,data=manali.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=manali.df,horizontal = TRUE)
+
+table(manali.df$HotelName, manali.df$FreeWifi&manali.df$FreeBreakfast)
+table(manali.df$HotelName , manali.df$IsNewYearEve|manali.df$IsWeekend)
+par(mfrow=c(3,1))
+with(manali.df,plot(manali.df$Airport , manali.df$RoomRent))
+with(manali.df,plot(manali.df$FreeWifi&manali.df$FreeBreakfast , manali.df$RoomRent))
+with(manali.df,plot(manali.df$IsNewYearEve|manali.df$IsWeekend,manali.df$RoomRent))
+manali.df[1:5]<- list(NULL)
+manali.df[3]<- NULL
+manali.df[7:9] <- list(NULL)
+manali.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(manali.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(manali.df[,c(1,2,4,5,6,7,8)])
+
+#Ahmedabad
+ahmedabad.df <- read.csv(paste("5 Ahmedabad.csv", sep="")) #to read the file
+View(ahmedabad.df)
+summary(ahmedabad.df)
+dim(ahmedabad.df)
+barchart(HotelName~ StarRating,data=ahmedabad.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=ahmedabad.df,horizontal = TRUE)
+
+table(ahmedabad.df$HotelName, ahmedabad.df$FreeWifi&ahmedabad.df$FreeBreakfast)
+table(ahmedabad.df$HotelName , ahmedabad.df$IsNewYearEve|ahmedabad.df$IsWeekend)
+par(mfrow=c(3,1))
+with(ahmedabad.df,plot(ahmedabad.df$Airport , ahmedabad.df$RoomRent))
+with(ahmedabad.df,plot(ahmedabad.df$FreeWifi&ahmedabad.df$FreeBreakfast , ahmedabad.df$RoomRent))
+with(ahmedabad.df,plot(ahmedabad.df$IsNewYearEve|ahmedabad.df$IsWeekend,ahmedabad.df$RoomRent))
+ahmedabad.df[1:5]<- list(NULL)
+ahmedabad.df[3]<- NULL
+ahmedabad.df[7:9] <- list(NULL)
+ahmedabad.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(ahmedabad.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(ahmedabad.df[,c(1,2,4,5,6,7,8)])
+
+#Kolkata
+kolkata.df <- read.csv(paste("6 Kolkata.csv", sep="")) #to read the file
+View(kolkata.df)
+summary(kolkata.df)
+dim(kolkata.df)
+barchart(HotelName~ StarRating,data=kolkata.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=kolkata.df,horizontal = TRUE)
+
+table(kolkata.df$HotelName, kolkata.df$FreeWifi&kolkata.df$FreeBreakfast)
+table(kolkata.df$HotelName , kolkata.df$IsNewYearEve|kolkata.df$IsWeekend)
+par(mfrow=c(3,1))
+with(kolkata.df,plot(kolkata.df$Airport , kolkata.df$RoomRent))
+with(kolkata.df,plot(kolkata.df$FreeWifi&kolkata.df$FreeBreakfast , kolkata.df$RoomRent))
+with(kolkata.df,plot(kolkata.df$IsNewYearEve|kolkata.df$IsWeekend,kolkata.df$RoomRent))
+kolkata.df[1:5]<- list(NULL)
+kolkata.df[3]<- NULL
+kolkata.df[7:9] <- list(NULL)
+kolkata.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(kolkata.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(kolkata.df[,c(1,2,4,5,6,7,8)])
+
+#Surat
+surat.df <- read.csv(paste("7 Surat.csv", sep="")) #to read the file
+View(surat.df)
+summary(surat.df)
+dim(surat.df)
+barchart(HotelName~ StarRating,data=surat.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=surat.df,horizontal = TRUE)
+
+table(surat.df$HotelName, surat.df$FreeWifi&surat.df$FreeBreakfast)
+table(surat.df$HotelName , surat.df$IsNewYearEve|surat.df$IsWeekend)
+par(mfrow=c(3,1))
+with(surat.df,plot(surat.df$Airport , surat.df$RoomRent))
+with(surat.df,plot(surat.df$FreeWifi&surat.df$FreeBreakfast , surat.df$RoomRent))
+with(surat.df,plot(surat.df$IsNewYearEve|surat.df$IsWeekend,surat.df$RoomRent))
+surat.df[1:5]<- list(NULL)
+surat.df[3]<- NULL
+surat.df[7:9] <- list(NULL)
+surat.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(surat.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(surat.df[,c(1,2,4,5,6,7,8)])
+
+#Pune
+pune.df <- read.csv(paste("8 Pune.csv", sep="")) #to read the file
+View(pune.df)
+summary(pune.df)
+dim(pune.df)
+barchart(HotelName~ StarRating,data=pune.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=pune.df,horizontal = TRUE)
+
+table(pune.df$HotelName, pune.df$FreeWifi&pune.df$FreeBreakfast)
+table(pune.df$HotelName , pune.df$IsNewYearEve|pune.df$IsWeekend)
+par(mfrow=c(3,1))
+with(pune.df,plot(pune.df$Airport , pune.df$RoomRent))
+with(pune.df,plot(pune.df$FreeWifi&pune.df$FreeBreakfast , pune.df$RoomRent))
+with(pune.df,plot(pune.df$IsNewYearEve|pune.df$IsWeekend,pune.df$RoomRent))
+pune.df[1:5]<- list(NULL)
+pune.df[3]<- NULL
+pune.df[7:9] <- list(NULL)
+pune.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(pune.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(pune.df[,c(1,2,4,5,6,7,8)])
+
+#Jaipur
+jaipur.df <- read.csv(paste("9 Jaipur.csv", sep="")) #to read the file
+View(jaipur.df)
+summary(jaipur.df)
+dim(jaipur.df)
+barchart(HotelName~ StarRating,data=jaipur.df)
+library(lattice)
+bwplot(HotelName ~Airport,data=jaipur.df,horizontal = TRUE)
+
+table(jaipur.df$HotelName, jaipur.df$FreeWifi&jaipur.df$FreeBreakfast)
+table(jaipur.df$HotelName , jaipur.df$IsNewYearEve|jaipur.df$IsWeekend)
+par(mfrow=c(3,1))
+with(jaipur.df,plot(jaipur.df$Airport , jaipur.df$RoomRent))
+with(jaipur.df,plot(jaipur.df$FreeWifi&jaipur.df$FreeBreakfast , jaipur.df$RoomRent))
+with(jaipur.df,plot(jaipur.df$IsNewYearEve|jaipur.df$IsWeekend,jaipur.df$RoomRent))
+jaipur.df[1:5]<- list(NULL)
+jaipur.df[3]<- NULL
+jaipur.df[7:9] <- list(NULL)
+jaipur.df[9:10]<- list(NULL)
+library(corrgram)
+corrgram(jaipur.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(jaipur.df[,c(1,2,4,5,6,7,8)])
+
+#Combined Analsis of all 42 cities
+#Reading the data
+cities.df<- read.csv(paste("Cities42.csv", sep=""))
+attach(cities.df)
+View(cities.df)
+
+library(psych)
+describe(cities.df)[,c(2,3,4,5,8,9)]
+
+#Visualisation
+par(mfrow=c(4,1))
+with(cities.df,plot(cities.df$Airport , cities.df$RoomRent))
+with(cities.df,plot(cities.df$FreeWifi , cities.df$RoomRent))
+with(cities.df,plot(cities.df$IsNewYearEve|cities.df$IsWeekend,cities.df$RoomRent))
+with(cities.df,plot(cities.df$IsTouristDestination,cities.df$RoomRent))
+
+table(cities.df$FreeWifi&cities.df$FreeBreakfast)
+table(cities.df$IsNewYearEve|cities.df$IsWeekend)
+
+aggregate(cbind(FreeWifi,FreeBreakfast,HasSwimmingPool,RoomRent)~ CityName, data=cities.df,mean)
+
+boxplot(RoomRent ~ Airport,data=cities.df, main="Airport Distance vs Roomrent", ylab="Airport Distance", xlab="Roomrent", horizontal=TRUE)
+
+freewifiandbfholiday <- xtabs(~FreeWifi + FreeBreakfast + HasSwimmingPool+IsWeekend+IsNewYearEve,data=cities.df)
+ftable(freewifiandbfholiday)
+
+library(vcd)
+mosaic(freewifiandbfholiday, shade=TRUE, legend=TRUE, main="Relational factors")
+
+library(car)
+scatterplotMatrix(~RoomRent+ Airport+StarRating +HotelCapacity,data=cities.df)
+
+scatterplotMatrix(~RoomRent+ FreeWifi+FreeBreakfast +HasSwimmingPool,data=cities.df)
+
+#corrgram
+library(corrgram)
+corrgram(cities.df,order = TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel=panel.txt)
+cor(cities.df[,c(4,5,6,7,8,11,12,13,17,18,19,20)])
+
+
+#t tests
+t.test(RoomRent,StarRating)
+t.test(RoomRent,Airport)
+t.test(RoomRent,FreeWifi&FreeBreakfast)
+t.test(RoomRent,IsWeekend|IsNewYearEve)
+t.test(RoomRent,HotelCapacity)
+
+#Regression analysis
+model1<- RoomRent~ IsMetroCity + CityRank+ IsTouristDestination+IsWeekend+IsNewYearEve+ Date+StarRating+FreeWifi+FreeBreakfast+HotelCapacity+HasSwimmingPool+Airport
+fit1 <- lm(model1,data =cities.df)
+summary(fit1)
+
+library(leaps)
+leap1 <- regsubsets(model1,data =cities.df,nbest=1)
+plot(leap1,scale ="adjr2")
+
+#refined model
+model2<- RoomRent~ IsMetroCity+CityRank + IsTouristDestination+StarRating+HotelCapacity+HasSwimmingPool
+fit2 <- lm(model2,data =cities.df)
+summary(fit2)
+
+library(coefplot)
+coefplot(fit2,intercept = FALSE,outerCI =1.96,coefficients= c("IsMetroCity","Istourist","StarRating","HotelCapacity","Haspool","Airport"))
+
+summary(fit1)$adj.r.squared
+summary(fit2)$adj.r.squared
+AIC(fit1)
+AIC(fit2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
