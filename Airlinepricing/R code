@@ -1,0 +1,100 @@
+# Analysis of Airline Ticket Pricing
+# NAME: VIDYA PREETHA ANANDAMURALI
+
+
+sixairs.df <- read.csv(paste("SixAirlines.csv",sep=""))
+View(sixairs.df)
+summary(sixairs.df)
+#distribution for flight duration
+boxplot(sixairs.df$FLIGHT_DURATION~sixairs.df$AIRLINE,horizontal = TRUE,col=c("blue","green","yellow"),yaxt= "n",ylab= "Airlines",xlab ="Duration",main="Duration Distribution")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin"))
+
+#distribution for aircraft type
+plot(sixairs.df$AIRCRAFT,sixairs.df$AIRLINE,col=c("blue","green","yellow"),yaxt= "n",ylab= "Airlines",xlab ="Aircraft type",main="Distribution of aircraft type")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin")) #to provide the labels for the supressed axis
+#since jitter values are present the best way to analyse this data is to use scatter plots
+
+#distribution of month they travel in
+boxplot(sixairs.df$MONTH~sixairs.df$AIRLINE,horizontal = TRUE,col=c("blue","green","yellow"),yaxt= "n",ylab= "Airlines",xlab ="Month",xaxt="n",main="Monthly Distribution")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin"))
+axis(side =1, at =c(0,1,2,3),labels = c("July","August","September","October"))
+
+#distribution of international travels made
+library(lattice)
+barchart(sixairs.df$AIRLINE~ sixairs.df$INTERNATIONAL, main="Domestic or international flights",xlab="international or deomestic") 
+
+#distribution of seats economy
+library(lattice) #barchart is stored in lattice library
+barchart(sixairs.df$SEATS_ECONOMY ~ sixairs.df$AIRLINE, ylab="No.of seats in economy",main="Distribution of economy seats")
+
+#distribution of premium seats
+barchart(sixairs.df$SEATS_PREMIUM ~ sixairs.df$AIRLINE, ylab="No.of seats in premium",main="Distribution of premium seats")
+
+#distribution of pitch of economy
+barchart(sixairs.df$PITCH_ECONOMY~sixairs.df$AIRLINE,ylab="Pitch economy",xlab="Ailines",col="grey")
+
+#distribution of pitch of premium
+barchart(sixairs.df$PITCH_PREMIUM~sixairs.df$AIRLINE,ylab="Pitch premium",xlab="Ailines",col="grey",main="Distribution of pitch values of premium seats")
+
+#ditribution of width of economy seats
+barchart(sixairs.df$WIDTH_ECONOMY~sixairs.df$AIRLINE,ylab="width economy",xlab="Ailines",col="grey",main="Distribution of pitch values of economy seats")
+
+#distribution of width of premium seats
+barchart(sixairs.df$WIDTH_PREMIUM~sixairs.df$AIRLINE,ylab="width premium",xlab="Ailines",col="grey",main="Distribution of pitch values of economy seats")
+
+#distribution of price of economy
+boxplot(sixairs.df$PRICE_ECONOMY~sixairs.df$AIRLINE,horizontal = TRUE,col=c("blue","green","yellow"),yaxt= "n",ylab= "Airlines",xlab ="Price of Economy",main="distribution of price of economy")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin"))
+
+#distribution of price of premium
+boxplot(sixairs.df$PRICE_PREMIUM~sixairs.df$AIRLINE,horizontal = TRUE,col=c("blue","green","yellow"),yaxt= "n",ylab= "Airlines",xlab ="Price of premium",main="distribution of price of premium")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin"))
+#distribution of quality
+barchart(sixairs.df$QUALITY~sixairs.df$AIRLINE,ylab="Quality",xlab="Ailines",col="grey")
+
+#scatterplots to find correlations
+#relationship between flight duration and type of airline
+plot(sixairs.df$FLIGHT_DURATION,sixairs.df$AIRLINE,xlab = "FLight duration",ylab = "Airlines",yaxt ="n",main = "relationship between flight duration and type of airline
+")
+axis(side=2,at=c(1,2,3,4,5,6),labels=c("Airfrance","British","Delta","Jet","Singapore","Virgin"))
+
+#relationship between flight duration and type of flight
+plot(sixairs.df$FLIGHT_DURATION,sixairs.df$AIRCRAFT,xlab = "FLight duration",ylab = "Aircraft type",yaxt ="n",main = "relationship between flight duration and type of aircraft
+")
+axis(side=2,at=c(0,1,2),labels=c("Boeing","Airbus","Others"))
+
+#relationship between pitch of economy and price of economy
+plot(x= sixairs.df$PRICE_ECONOMY,y= sixairs.df$PITCH_ECONOMY,xlab = "Price",ylab = "Pitch value",main = "relationship between pitch of economy and price of economy")
+
+#relationship between pitch of premium and price of premium
+plot(x= sixairs.df$PRICE_PREMIUM,y= sixairs.df$PITCH_PREMIUM,xlab = "Price",ylab = "Pitch value",main = "relationship between pitch of premium and price of premium")
+
+#relationship between width of economy and price of economy
+plot(x= sixairs.df$PRICE_ECONOMY,y= sixairs.df$WIDTH_ECONOMY,xlab = "Price",ylab = "Width value",main = "relationship between width of economy and price of economy")
+
+#relationship between width of premium and price of premium
+plot(x= sixairs.df$PRICE_PREMIUM,y= sixairs.df$WIDTH_PREMIUM,xlab = "Price",ylab = "width value",main = "relationship between width of premium and price of premium")
+
+#corrgrams
+library(corrgram)
+corrgram(sixairs.df,order=TRUE, lower.panel = panel.shade,upper.panel = panel.pie,text.panel = panel.txt,main="Corrgram")
+
+#matrix formation
+cor(sixairs.df[,c(2,3,5:10)])
+
+#T tests
+#to check the interdependency between prices and internationl or domestic flights
+t.test(sixairs.df$PRICE_ECONOMY,sixairs.df$INTERNATIONAL)
+
+t.test(sixairs.df$SEATS_PREMIUM,sixairs.df$PRICE_PREMIUM)
+
+t.test(sixairs.df$PITCH_ECONOMY,sixairs.df$PITCH_PREMIUM,paired = TRUE)
+
+t.test(sixairs.df$PRICE_ECONOMY,sixairs.df$PRICE_PREMIUM,paired =TRUE)
+t.test(sixairs.df$PRICE_ECONOMY,sixairs.df$QUALITY)
+#linear regression model
+fit<-lm(PRICE_ECONOMY ~.,data=sixairs.df)
+summary(fit)
+fit<- lm(PRICE_PREMIUM ~.data=sixairs.df)
+fit$coefficients
+
